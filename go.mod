@@ -1,4 +1,4 @@
-module ynab-notifier
+module ynot
 
 go 1.21.0
 

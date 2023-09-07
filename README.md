@@ -1,4 +1,4 @@
-# ynab-notifier
+# ynot - the YNAB Notifier
 
 YNAB email notifier for favorite and overspent categories and goals.
 
