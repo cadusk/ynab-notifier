@@ -1,0 +1,110 @@
+<html>
+  <head>
+    <style>
+    body {
+      font-family: "Segoe UI",Arial,sans-serif;
+      font-weight: 400;
+    }
+    table, td, th {
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      padding: 15px;
+    }
+    th {
+      background-color: #eee;
+    }
+    #red-flag-section, #red-flag-section table {
+      color: red;
+    }
+    #red-flag-section th {
+      background-color: #fdd;
+    }
+    #red-flag-section table, #red-flag-section td, #red-flag-section th {
+      border: 1px solid #fcc;
+    }
+    #goals-section, #goals-section table {
+      color: green  ;
+    }
+    #goals-section th {
+      background-color: #dfd;
+    }
+    #goals-section table, #goals-section td, #goals-section th {
+      border: 1px solid #cfc;
+    }
+    </style>
+  </head>
+  <body>
+
+    <section id="balance-section">
+      <h1>Budget balance</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each favorites}}
+          <tr>
+            <td>{{this.name}}</td>
+            <td>$ {{this.value}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </section>
+
+    {{#if red_flags}}
+    <section id="red-flag-section">
+      <h1>Red Flags</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each red_flags}}
+          <tr>
+            <td>{{this.name}}</td>
+            <td>$ {{this.value}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </section>
+    {{/if}}
+
+    {{#if goals}}
+    <section id="goals-section">
+      <h1>Goals</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Goal</th>
+            <th>Percentage</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each goals}}
+          <tr>
+            <td>{{this.name}}</td>
+            <td>{{this.value}}%</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </section>
+    {{/if}}
+  </body>
+</html>
+
+
