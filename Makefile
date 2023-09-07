@@ -1,4 +1,4 @@
-.PHONY: test build run deps vet clean
+.PHONY: test build run vet clean
 
 ifndef VERBOSE
 .SILENT:
@@ -10,7 +10,7 @@ BINARY_NAME=$(OUTPUT_FOLDER)/ynot
 SOURCE=$(wildcard *.go)
 MODULES=go.mod go.sum
 
-build: $(BINARY_NAME)
+build: $(BINARY_NAME) ;
 
 $(BINARY_NAME): $(SOURCE) $(MODULES)
 	mkdir -p $(OUTPUT_FOLDER)
@@ -21,9 +21,6 @@ test:
 
 run: $(BINARY_NAME)
 	sh -c "source .env && $(BINARY_NAME)"
-
-deps:
-	go mod download
 
 vet:
 	go vet
