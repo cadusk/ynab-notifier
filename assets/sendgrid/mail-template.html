@@ -5,7 +5,7 @@
       font-family: "Segoe UI",Arial,sans-serif;
       font-weight: 400;
     }
-    table, td, th {
+    table, td, th {  
       border: 1px solid #ddd;
       text-align: left;
     }
@@ -40,71 +40,69 @@
     </style>
   </head>
   <body>
-
+    
     <section id="balance-section">
       <h1>Budget balance</h1>
       <table>
         <thead>
           <tr>
             <th>Category</th>
-            <th>Balance</th>
+            <th>Balance</th>         
           </tr>
         </thead>
         <tbody>
-          {{#each favorites}}
+          {{#each report.favorites}}
           <tr>
             <td>{{this.name}}</td>
             <td>$ {{this.value}}</td>
           </tr>
-          {{/each}}
+          {{/each}} 
         </tbody>
       </table>
     </section>
-
-    {{#if red_flags}}
+    
+    {{#if report.red_flags}}
     <section id="red-flag-section">
       <h1>Red Flags</h1>
       <table>
         <thead>
           <tr>
             <th>Category</th>
-            <th>Balance</th>
+            <th>Balance</th>         
           </tr>
         </thead>
         <tbody>
-          {{#each red_flags}}
+          {{#each report.red_flags}}
           <tr>
             <td>{{this.name}}</td>
             <td>$ {{this.value}}</td>
           </tr>
-          {{/each}}
+          {{/each}} 
         </tbody>
       </table>
     </section>
     {{/if}}
 
-    {{#if goals}}
+    {{#if report.goals}}
     <section id="goals-section">
       <h1>Goals</h1>
       <table>
         <thead>
           <tr>
             <th>Goal</th>
-            <th>Percentage</th>
+            <th>Percentage</th>         
           </tr>
         </thead>
         <tbody>
-          {{#each goals}}
+          {{#each report.goals}}
           <tr>
             <td>{{this.name}}</td>
             <td>{{this.value}}%</td>
           </tr>
-          {{/each}}
+          {{/each}} 
         </tbody>
       </table>
     </section>
     {{/if}}
   </body>
 </html>
-
-

@@ -56,7 +56,7 @@ func sendReport(r *budget.Report) {
 	for _, to := range c.Sendgrid.MailTo {
 		m.AddTo(to)
 	}
-	m.SetDynamicTemplateData("summary", r)
+	m.SetDynamicTemplateData("report", r)
 
 	mail.Send(c.Sendgrid.AccessToken, m)
 }

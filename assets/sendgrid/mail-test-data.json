@@ -1,14 +1,16 @@
 {
   "date": "Dec 2nd, 2019",
-  "favorites": [
-    { "name": "Category #1", "value": "150" },
-    { "name": "Category #2", "value": "200" }
-  ],
-  "red_flags": [
-    { "name": "Category #3", "value": "150" },
-    { "name": "Category #4", "value": "200" }
-  ],
-  "goals": [
-    { "name": "Goal #1", "value": "34" }
-  ]
+  "report": {
+    "favorites": [
+      { "name": "Category #1", "value": "150" },
+      { "name": "Category #2", "value": "200" }
+    ],
+    "red_flags": [
+      { "name": "Category #3", "value": "150" },
+      { "name": "Category #4", "value": "200" }
+    ],
+    "goals": [
+      { "name": "Goal #1", "value": "34" }
+    ]
+  }
 }
