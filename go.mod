@@ -1,4 +1,4 @@
-module ynot
+module github.com/cadusk/ynot
 
 go 1.21.0
 

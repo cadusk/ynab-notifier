@@ -1,10 +1,12 @@
-package main
+package config
 
 import (
 	"fmt"
 
 	"github.com/spf13/viper"
 )
+
+const EnvFileName = ".env"
 
 type Config struct {
 	Sendgrid struct {
@@ -22,11 +24,11 @@ type Config struct {
 }
 
 func NewConfig() *Config {
-	viper.SetConfigFile(".env")
+	viper.SetConfigFile(EnvFileName)
 
 	err := viper.ReadInConfig()
 	if err != nil {
-		panic(fmt.Errorf("Fatal error config file: %w \n", err))
+		panic(fmt.Errorf("fatal error config file: %w\n", err))
 	}
 
 	c := Config{}

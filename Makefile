@@ -4,26 +4,27 @@ ifndef VERBOSE
 .SILENT:
 endif
 
+APP=./cmd/app
 OUTPUT_FOLDER=./bin
 BINARY_NAME=$(OUTPUT_FOLDER)/ynot
 
-SOURCE=$(wildcard *.go)
+SOURCE=$(shell find ./ -type f -name '*.go')
 MODULES=go.mod go.sum
 
 build: $(BINARY_NAME) ;
 
 $(BINARY_NAME): $(SOURCE) $(MODULES)
 	mkdir -p $(OUTPUT_FOLDER)
-	go build -o $(BINARY_NAME) $(SOURCE)
+	go build -o $(BINARY_NAME) $(APP)
 
 test:
-	go test -v $(SOURCE)
+	go test -v ./...
 
 run: $(BINARY_NAME)
 	sh -c "source .env && $(BINARY_NAME)"
 
 vet:
-	go vet
+	go vet $(APP)
 
 clean:
 	go clean
