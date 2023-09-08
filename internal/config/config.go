@@ -32,7 +32,6 @@ func NewConfig() *Config {
 	}
 
 	c := Config{}
-
 	c.Sendgrid.AccessToken = viper.GetString("SENDGRID_TOKEN")
 	c.Sendgrid.TemplateID = viper.GetString("SENDGRID_TEMPLATE_ID")
 	c.Sendgrid.MailFrom = viper.GetString("SENDGRID_MAIL_FROM")

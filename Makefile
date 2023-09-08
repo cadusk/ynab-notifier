@@ -20,7 +20,7 @@ $(BINARY_NAME): $(SOURCE) $(MODULES)
 test:
 	go test -v ./...
 
-run: $(BINARY_NAME)
+run: build
 	sh -c "source .env && $(BINARY_NAME)"
 
 vet:

@@ -9,36 +9,29 @@ import (
 	"github.com/cadusk/ynot/internal/mail"
 )
 
+var c *config.Config = config.NewConfig()
+
 func main() {
-
-	c := config.NewConfig()
-
-	summary := budget.NewSummary()
 	categories := budget.FetchCategories(c.Ynab.AccessToken, c.Ynab.BudgetID)
 
+	report := budget.NewReport()
 	for _, category := range categories {
 		if isRedFlag(category) {
-			summary.AddRedFlag(category)
+			report.AddRedFlag(category)
+			continue
 		}
 
 		if isFavorite(category) {
-			summary.AddFavorite(category)
+			report.AddFavorite(category)
+			continue
 		}
 
 		if isGoal(category) {
-			summary.AddGoal(category)
+			report.AddGoal(category)
 		}
 	}
 
-	m := mail.NewMailMessage()
-	m.SetTemplateID(c.Sendgrid.TemplateID)
-	m.SetFrom(c.Sendgrid.MailFrom)
-	for _, to := range c.Sendgrid.MailTo {
-		m.AddTo(to)
-	}
-	m.SetDynamicTemplateData("summary", summary)
-
-	mail.Send(c.Sendgrid.AccessToken, m)
+	sendReport(report)
 }
 
 func isRedFlag(c *category.Category) bool {
@@ -46,9 +39,24 @@ func isRedFlag(c *category.Category) bool {
 }
 
 func isFavorite(c *category.Category) bool {
-	return c.Note != nil && strings.Contains(*c.Note, "notifier:favorite")
+	return c.Note != nil &&
+		strings.Contains(*c.Note, "notifier:favorite")
 }
 
 func isGoal(c *category.Category) bool {
-	return c.Note != nil && strings.Contains(*c.Note, "notifier:goal") && c.GoalPercentageComplete != nil
+	return c.Note != nil &&
+		strings.Contains(*c.Note, "notifier:goal") &&
+		c.GoalPercentageComplete != nil
+}
+
+func sendReport(r *budget.Report) {
+	m := mail.NewMessage()
+	m.SetTemplateID(c.Sendgrid.TemplateID)
+	m.SetFrom(c.Sendgrid.MailFrom)
+	for _, to := range c.Sendgrid.MailTo {
+		m.AddTo(to)
+	}
+	m.SetDynamicTemplateData("summary", r)
+
+	mail.Send(c.Sendgrid.AccessToken, m)
 }

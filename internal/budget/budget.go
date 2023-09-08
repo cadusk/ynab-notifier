@@ -7,8 +7,9 @@ import (
 	"github.com/brunomvsouza/ynab.go/api/category"
 )
 
-func FetchCategories(token, budgetId string) []*category.Category {
-	client := ynab.NewClient(token)
+func FetchCategories(accessToken, budgetId string) []*category.Category {
+	client := ynab.NewClient(accessToken)
+
 	result, err := client.Budget().GetBudget(budgetId, nil)
 	if err != nil {
 		panic(err)
@@ -17,41 +18,41 @@ func FetchCategories(token, budgetId string) []*category.Category {
 	return result.Budget.Categories
 }
 
-type Summary struct {
-	Favorites []SummaryCategory `json:"favorites"`
-	RedFlags  []SummaryCategory `json:"red_flags"`
-	Goals     []SummaryCategory `json:"goals"`
+type Report struct {
+	Favorites []reportItem `json:"favorites"`
+	RedFlags  []reportItem `json:"red_flags"`
+	Goals     []reportItem `json:"goals"`
 }
 
-type SummaryCategory struct {
+type reportItem struct {
 	Name  string `json:"name"`
 	Value string `json:"value"`
 }
 
-func NewSummary() *Summary {
-	s := new(Summary)
-	s.Favorites = []SummaryCategory{}
-	s.RedFlags = []SummaryCategory{}
-	s.Goals = []SummaryCategory{}
-	return s
+func NewReport() *Report {
+	s := Report{}
+	s.Favorites = []reportItem{}
+	s.RedFlags = []reportItem{}
+	s.Goals = []reportItem{}
+	return &s
 }
 
-func (s *Summary) AddFavorite(c *category.Category) {
-	s.Favorites = append(s.Favorites, newBalanceCategory(c))
+func (s *Report) AddFavorite(c *category.Category) {
+	s.Favorites = append(s.Favorites, newBalanceItem(c))
 }
 
-func (s *Summary) AddRedFlag(c *category.Category) {
-	s.RedFlags = append(s.RedFlags, newBalanceCategory(c))
+func (s *Report) AddRedFlag(c *category.Category) {
+	s.RedFlags = append(s.RedFlags, newBalanceItem(c))
 }
 
-func (s *Summary) AddGoal(c *category.Category) {
-	s.Goals = append(s.Goals, newPercentageCategory(c))
+func (s *Report) AddGoal(c *category.Category) {
+	s.Goals = append(s.Goals, newPercentageItem(c))
 }
 
-func newBalanceCategory(c *category.Category) SummaryCategory {
-	return SummaryCategory{c.Name, fmt.Sprintf("%.2f", float32(c.Balance)/1000)}
+func newBalanceItem(c *category.Category) reportItem {
+	return reportItem{c.Name, fmt.Sprintf("%.2f", float32(c.Balance)/1000)}
 }
 
-func newPercentageCategory(c *category.Category) SummaryCategory {
-	return SummaryCategory{c.Name, fmt.Sprintf("%d", *c.GoalPercentageComplete)}
+func newPercentageItem(c *category.Category) reportItem {
+	return reportItem{c.Name, fmt.Sprintf("%d", *c.GoalPercentageComplete)}
 }
