@@ -1,4 +1,4 @@
-.PHONY: test build run vet clean
+.PHONY: test build run vet clean build-release
 
 ifndef VERBOSE
 .SILENT:
@@ -16,6 +16,10 @@ build: $(BINARY_NAME) ;
 $(BINARY_NAME): $(SOURCE) $(MODULES)
 	mkdir -p $(OUTPUT_FOLDER)
 	go build -o $(BINARY_NAME) $(APP)
+
+build-release:
+	mkdir -p $(OUTPUT_FOLDER)
+	GOOS=linux GOARCH=amd64 go build -o $(BINARY_NAME)-linux $(APP)
 
 test:
 	go test -v ./...
