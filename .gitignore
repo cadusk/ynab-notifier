@@ -23,3 +23,6 @@ go.work
 
 # environment configuration files
 *.env
+
+# MacOS noise
+.DS_Store
