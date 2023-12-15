@@ -35,16 +35,18 @@ func main() {
 }
 
 func isRedFlag(c *category.Category) bool {
-	return c.Balance < 0
+	return !c.Deleted && c.Balance < 0
 }
 
 func isFavorite(c *category.Category) bool {
 	return c.Note != nil &&
+		!c.Deleted &&
 		strings.Contains(*c.Note, "notifier:favorite")
 }
 
 func isGoal(c *category.Category) bool {
 	return c.Note != nil &&
+		!c.Deleted &&
 		strings.Contains(*c.Note, "notifier:goal") &&
 		c.GoalPercentageComplete != nil
 }
