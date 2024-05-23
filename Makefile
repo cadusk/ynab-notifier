@@ -1,10 +1,10 @@
-.PHONY: test build run vet clean build-release
+.PHONY: test build run vet clean release
 
 ifndef VERBOSE
 .SILENT:
 endif
 
-APP=./cmd/app
+APP=./cmd/ynot
 OUTPUT_FOLDER=./bin
 BINARY_NAME=$(OUTPUT_FOLDER)/ynot
 
@@ -17,7 +17,7 @@ $(BINARY_NAME): $(SOURCE) $(MODULES)
 	mkdir -p $(OUTPUT_FOLDER)
 	go build -o $(BINARY_NAME) $(APP)
 
-build-release:
+release:
 	mkdir -p $(OUTPUT_FOLDER)
 	GOOS=linux GOARCH=amd64 go build -o $(BINARY_NAME)-linux $(APP)
 
