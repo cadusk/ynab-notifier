@@ -16,7 +16,6 @@ env:
   YNAB_TOKEN: ${{ secrets.YNAB_TOKEN }}
   YNAB_BUDGET_ID: ${{ secrets.YNAB_BUDGET_ID }}
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
