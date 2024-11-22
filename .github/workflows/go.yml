@@ -5,7 +5,7 @@ name: Send daily budget notification
 
 on:
   schedule:
-  - cron: "0,12,*,*,*"
+  - cron: "0 12 * * *"
 
 env:
   SENDGRID_TOKEN: ${{ secrets.SENDGRID_TOKEN }}
