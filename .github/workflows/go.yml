@@ -9,10 +9,10 @@ on:
 
 env:
   SENDGRID_TOKEN: ${{ secrets.SENDGRID_TOKEN }}
-  SENDGRID_TEMPLATE_ID: ${{ secrets.YNOT_SENDGRID_TEMPLATE }}
-  SENDGRID_MAIL_FROM: ${{ secrets.YNOT_MAIL_FROM }}
+  SENDGRID_TEMPLATE_ID: ${{ secrets.SENDGRID_TEMPLATE_ID }}
+  SENDGRID_MAIL_FROM: ${{ secrets.SENDGRID_MAIL_FROM }}
   SENDGRID_MAIL_FROM_NAME: "Budget Notification Service - GitHub Action"
-  SENDGRID_MAIL_TO: ${{ secrets.YNOT_MAIL_TO }}
+  SENDGRID_MAIL_TO: ${{ secrets.SENDGRID_MAIL_TO }}
   YNAB_TOKEN: ${{ secrets.YNAB_TOKEN }}
   YNAB_BUDGET_ID: ${{ secrets.YNAB_BUDGET_ID }}
 
