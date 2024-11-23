@@ -25,7 +25,7 @@ test:
 	go test -v ./...
 
 run: build
-	sh -c "source .env && $(BINARY_NAME)"
+	$(BINARY_NAME)
 
 vet:
 	go vet $(APP)
