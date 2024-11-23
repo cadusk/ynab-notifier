@@ -24,13 +24,21 @@ type Config struct {
 }
 
 func NewConfig() *Config {
-	viper.SetConfigFile(EnvFileName)
 
+	// Read settings from environment variables
+	viper.AutomaticEnv()
+
+	// Read settings from config file
+	viper.SetConfigFile(EnvFileName)
 	err := viper.ReadInConfig()
 	if err != nil {
-		panic(fmt.Errorf("fatal error config file: %w\n", err))
+		// TODO: convert to logging instead of printing to stdout
+		fmt.Printf("Unable to read configuration file. Relying on envinronment variables only.\n")
 	}
 
+	// Store settings into Config struct.
+	// The way viper works is that it will look for the key in the environment variables
+	// and if it doesn't find it, it will look for the key in the config file
 	c := Config{}
 	c.Sendgrid.AccessToken = viper.GetString("SENDGRID_TOKEN")
 	c.Sendgrid.TemplateID = viper.GetString("SENDGRID_TEMPLATE_ID")
