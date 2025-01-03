@@ -6,8 +6,8 @@ name: Send daily budget notification
 on:
   workflow_dispatch:
   # schedule time is UTC. 12pm UTC = 7am EST
-  schedule:
-  - cron: "0 12 * * *"
+  #schedule:
+  #  - cron: "0 12 * * *"
 
 env:
   SENDGRID_TOKEN: ${{ secrets.SENDGRID_TOKEN }}
